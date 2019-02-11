@@ -1,0 +1,9 @@
+h1 {
+  font-size: 20vw !important;
+}
+
+@media screen and (max-width: 960px) {
+  h1 {
+    font-size: 35vw !important;
+  }
+}
