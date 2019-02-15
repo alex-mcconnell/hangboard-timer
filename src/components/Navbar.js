@@ -7,7 +7,7 @@ const Navbar = () => {
         <div className="container">
           <a href="/" className="brand-logo">Hangboard</a>
           <ul className="right">
-            <li><a><i className="material-icons">settings</i></a></li>
+            <li><a className="modal-trigger" href="#settings"><i className="material-icons">settings</i></a></li>
           </ul>
         </div>
       </div>

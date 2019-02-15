@@ -17,9 +17,7 @@ const Timer = ({ currentTime }) => {
   }
 
   return (
-    <div className="container">
-      <h1 className="center">{formatTime(currentTime)}</h1>
-    </div>
+    <h1 className="center">{formatTime(currentTime)}</h1>
   )
 }
 

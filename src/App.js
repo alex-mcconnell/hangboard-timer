@@ -3,15 +3,17 @@ import React, { Component } from 'react';
 import Navbar from './components/Navbar';
 import Timer from './components/Timer';
 import TimerControls from './components/TimerControls';
+import Stats from './components/Stats';
+import Settings from './components/Settings';
 
 class App extends Component {
   state = {
     settings: {
-      hangTime: 5,
-      restTime: 3,
-      breakTime: 5,
+      hangTime: 10,
+      restTime: 5,
+      breakTime: 30,
 
-      hangsPerSet: 2,
+      hangsPerSet: 6,
       totalSets: 2,
     },
     currentTimeType: null,
@@ -19,23 +21,25 @@ class App extends Component {
     currentHang: 0,
     currentSet: 0,
     interval: null,
+    totalElapsedTime: 0,
   }
 
   toggleTimer = () => {
     if (this.state.interval) {
       this.setState({
-        interval: clearInterval(this.state.interval)
+        interval: clearInterval(this.state.interval),
       });
     } else {
       this.setState({
-        interval: setInterval(this.decrementTime, 1000)
+        interval: setInterval(this.decrementTime, 1000),
       });
     }
   }
 
   decrementTime = () => {
     this.setState({
-      currentTime: this.state.currentTime - 1
+      currentTime: this.state.currentTime - 1,
+      totalElapsedTime: this.state.totalElapsedTime + 1,
     });
     this.toggleTimeType();
   }
@@ -46,6 +50,7 @@ class App extends Component {
       currentTime: 0,
       currentHang: 0,
       currentSet: 0,
+      totalElapsedTime: 0,
     });
     this.toggleTimer();  
   }
@@ -59,6 +64,7 @@ class App extends Component {
         currentHang: 0,
         currentSet: 1,
         currentTime: this.state.settings.restTime,
+        totalElapsedTime: 0,
       });
     }
 
@@ -102,8 +108,10 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar />
+        <Settings />
         <Timer currentTime={this.state.currentTime} />
-        <TimerControls timer={this.state} toggleTimer={this.toggleTimer} />
+        <TimerControls isRunning={this.state.interval} toggleTimer={this.toggleTimer} />
+        <Stats stats={this.state} />
       </div>
     );
   }
