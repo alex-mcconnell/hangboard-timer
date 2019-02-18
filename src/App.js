@@ -104,11 +104,17 @@ class App extends Component {
     }
   }
 
+  updateSettings = (settings) => {
+    this.setState({
+      settings: settings
+    })
+  }
+
   render() {
     return (
       <div className="App">
         <Navbar />
-        <Settings />
+        <Settings updateSettings={this.updateSettings} />
         <Timer currentTime={this.state.currentTime} />
         <TimerControls isRunning={this.state.interval} toggleTimer={this.toggleTimer} />
         <Stats stats={this.state} />

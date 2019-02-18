@@ -1,5 +1,6 @@
 h1 {
   font-size: 20vw !important;
+  margin-top: 0px;
 }
 
 @media screen and (max-width: 960px) {
