@@ -46,29 +46,29 @@ class Settings extends Component {
           <h4>Settings</h4>
           <div className="row">
             <div className="input-field col s6">
-              <input type="number" className="center" min="0" value={this.state.hangTime} onChange={(e) => this.changeSettings(e, 'hangTime')} />
+              <input type="number" className="center" min="0" value={ this.state.hangTime } onChange={ (e) => this.changeSettings(e, 'hangTime') } />
               <span className="helper-text center" data-error="wrong" data-success="right">Hang Time</span>
             </div>
             <div className="input-field col s6">
-              <input type="number" className="center" min="0" value={this.state.restTime} onChange={(e) => this.changeSettings(e, 'restTime')} />
+              <input type="number" className="center" min="0" value={ this.state.restTime } onChange={ (e) => this.changeSettings(e, 'restTime') } />
               <span className="helper-text center" data-error="wrong" data-success="right">Rest Time</span>
             </div>
             <div className="input-field col s6">
-              <input type="number" className="center" min="0" value={this.state.breakTime} onChange={(e) => this.changeSettings(e, 'breakTime')} />
+              <input type="number" className="center" min="0" value={ this.state.breakTime } onChange={ (e) => this.changeSettings(e, 'breakTime') } />
               <span className="helper-text center" data-error="wrong" data-success="right">Break Time</span>
             </div>
             <div className="input-field col s6">
-              <input type="number" className="center" min="0" value={this.state.hangsPerSet} onChange={(e) => this.changeSettings(e, 'hangsPerSet')} />
+              <input type="number" className="center" min="0" value={ this.state.hangsPerSet } onChange={ (e) => this.changeSettings(e, 'hangsPerSet') } />
               <span className="helper-text center" data-error="wrong" data-success="right">Hangs Per Set</span>
             </div>
             <div className="input-field col s6">
-              <input type="number" className="center" min="0" value={this.state.totalSets} onChange={(e) => this.changeSettings(e, 'totalSets')} />
+              <input type="number" className="center" min="0" value={ this.state.totalSets } onChange={ (e) => this.changeSettings(e, 'totalSets') } />
               <span className="helper-text center" data-error="wrong" data-success="right">Total Sets</span>
             </div>
           </div>
         </div>
         <div className="modal-footer">
-          <div className="modal-close waves-effect waves-green btn-flat" onClick={(e) => {this.props.updateSettings(this.state)}}>Save</div>
+          <div className="modal-close waves-effect waves-green btn-flat" onClick={ (e) => {this.props.updateSettings(this.state)} }>Save</div>
           <div className="modal-close waves-effect waves-green btn-flat">Cancel</div>
         </div>
       </div>

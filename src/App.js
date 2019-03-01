@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import NoSleep from 'nosleep.js';
 
 import Navbar from './components/Navbar';
 import Timer from './components/Timer';
@@ -24,15 +25,19 @@ class App extends Component {
     totalElapsedTime: 0,
   }
 
+  noSleep = new NoSleep();
+
   toggleTimer = () => {
     if (this.state.interval) {
       this.setState({
         interval: clearInterval(this.state.interval),
       });
+      this.noSleep.disable();     
     } else {
       this.setState({
         interval: setInterval(this.decrementTime, 1000),
       });
+      this.noSleep.enable();
     }
   }
 
@@ -114,10 +119,10 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar />
-        <Settings updateSettings={this.updateSettings} />
-        <Timer currentTime={this.state.currentTime} />
-        <TimerControls isRunning={this.state.interval} toggleTimer={this.toggleTimer} />
-        <Stats stats={this.state} />
+        <Settings updateSettings={ this.updateSettings } />
+        <Timer currentTime={ this.state.currentTime } />
+        <TimerControls isRunning={ this.state.interval } toggleTimer={ this.toggleTimer } />
+        <Stats stats={ this.state } />
       </div>
     );
   }

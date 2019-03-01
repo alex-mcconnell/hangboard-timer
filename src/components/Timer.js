@@ -17,9 +17,8 @@ const Timer = ({ currentTime }) => {
   }
 
   return (
-    <h1 className="center">{formatTime(currentTime)}</h1>
+    <h1 className="center">{ formatTime(currentTime) }</h1>
   )
 }
-
 
 export default Timer;
