@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TimerControls = ({ isRunning, toggleTimer }) => {
+const TimerControls = ({ isRunning, playPause }) => {
   const color = isRunning ? 'red' : 'green';
 
   return (
@@ -12,8 +12,8 @@ const TimerControls = ({ isRunning, toggleTimer }) => {
         <div className="col s6 row">
           <div
             className={`col s12 waves-effect waves-light btn-large ${color}`}
-            onClick={toggleTimer}
-            onKeyDown={toggleTimer}
+            onClick={playPause}
+            onKeyDown={playPause}
             role="button"
             tabIndex="0"
           >

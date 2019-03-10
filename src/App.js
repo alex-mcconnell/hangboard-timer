@@ -13,7 +13,6 @@ class App extends Component {
       hangTime: 10,
       restTime: 5,
       breakTime: 30,
-
       hangsPerSet: 6,
       totalSets: 2
     },
@@ -22,36 +21,8 @@ class App extends Component {
     currentHang: 0,
     currentSet: 0,
     interval: null,
-    totalElapsedTime: 0
-  };
-
-  noSleep = new NoSleep();
-
-  toggleTimer = () => {
-    const { interval } = this.state;
-
-    if (interval) {
-      this.setState({
-        interval: clearInterval(interval)
-      });
-      this.noSleep.disable();
-    } else {
-      this.setState({
-        interval: setInterval(this.decrementTime, 1000)
-      });
-      this.noSleep.enable();
-    }
-  };
-
-  decrementTime = () => {
-    const { currentTime, totalElapsedTime } = this.state;
-
-    this.setState({
-      currentTime: currentTime - 1,
-      totalElapsedTime: totalElapsedTime + 1
-    });
-
-    this.toggleTimeType();
+    totalElapsedTime: 0,
+    noSleep: new NoSleep()
   };
 
   resetTimer = () => {
@@ -62,59 +33,116 @@ class App extends Component {
       currentSet: 0,
       totalElapsedTime: 0
     });
-    this.toggleTimer();
   };
 
-  toggleTimeType = () => {
-    const { currentTimeType, currentTime, currentHang, currentSet, settings } = this.state;
+  startSet = () => {
+    const { currentSet, settings, currentTimeType } = this.state;
 
-    // Setup timer when first starting
-    if (currentTimeType === null) {
+    this.setState({
+      currentTimeType: 'rest',
+      currentSet: currentSet + 1,
+      currentHang: 0,
+      currentTime: settings.restTime
+    });
+
+    // Fixes 1 sec ahead issue when starting timer
+    if (!currentTimeType) {
       this.setState({
-        currentTimeType: 'rest',
-        currentHang: 0,
-        currentSet: 1,
-        currentTime: settings.restTime,
         totalElapsedTime: 0
       });
     }
+  };
 
-    if (currentTime === 0 && currentSet <= settings.totalSets) {
-      // Rest --> Hang
-      if (currentTimeType === 'rest' && currentHang < settings.hangsPerSet) {
-        this.setState({
-          currentTime: settings.hangTime,
-          currentTimeType: 'hang',
-          currentHang: currentHang + 1
-        });
-        // Hang --> Rest
-      } else if (currentTimeType === 'hang' && currentHang < settings.hangsPerSet) {
-        this.setState({
-          currentTime: settings.restTime,
-          currentTimeType: 'rest'
-        });
-        // Hang --> Break
-      } else if (
-        currentTimeType === 'hang' &&
-        currentHang === settings.hangsPerSet &&
-        currentSet < settings.totalSets
-      ) {
-        this.setState({
-          currentTime: settings.breakTime,
-          currentTimeType: 'break',
-          currentHang: 0
-        });
-        // Break --> Rest
-      } else if (currentTimeType === 'break' && currentSet < settings.totalSets) {
-        this.setState({
-          currentTime: settings.restTime,
-          currentTimeType: 'rest',
-          currentHang: 0,
-          currentSet: currentSet + 1
-        });
+  startHang = () => {
+    const { currentHang, settings } = this.state;
+
+    this.setState({
+      currentTimeType: 'hang',
+      currentHang: currentHang + 1,
+      currentTime: settings.hangTime
+    });
+  };
+
+  startRest = () => {
+    const { settings } = this.state;
+
+    this.setState({
+      currentTimeType: 'rest',
+      currentTime: settings.restTime
+    });
+  };
+
+  startBreak = () => {
+    const { settings } = this.state;
+
+    this.setState({
+      currentTimeType: 'break',
+      currentHang: 0,
+      currentTime: settings.breakTime
+    });
+  };
+
+  toggleTimeType = () => {
+    const { currentTimeType, currentTime, currentHang, currentSet, settings, noSleep } = this.state;
+
+    const shouldSwitchTimeType = currentTime === 0 && currentSet <= settings.totalSets;
+    const isInitialized = currentTimeType;
+
+    const isRest = currentTimeType === 'rest';
+    const isHang = currentTimeType === 'hang';
+    const isBreak = currentTimeType === 'break';
+
+    const hangsRemaining = currentHang < settings.hangsPerSet;
+    const setsRemaining = currentSet < settings.totalSets;
+
+    if (!isInitialized) {
+      this.startSet();
+    }
+
+    if (shouldSwitchTimeType) {
+      if (isRest && hangsRemaining) {
+        this.startHang();
+      } else if (isHang && hangsRemaining) {
+        this.startRest();
+      } else if (isHang && !hangsRemaining && setsRemaining) {
+        this.startBreak();
+      } else if (isBreak && setsRemaining) {
+        this.startSet();
       } else {
+        this.playPause();
         this.resetTimer();
+        noSleep.disable();
       }
+    }
+  };
+
+  timerTick = () => {
+    const { currentTime, totalElapsedTime } = this.state;
+
+    this.setState({
+      currentTime: currentTime - 1,
+      totalElapsedTime: totalElapsedTime + 1
+    });
+  };
+
+  timerIntervalSequence = () => {
+    this.timerTick();
+    this.toggleTimeType();
+  };
+
+  playPause = () => {
+    const { interval, noSleep } = this.state;
+
+    if (interval) {
+      this.setState({
+        interval: clearInterval(interval)
+      });
+      noSleep.disable();
+    } else {
+      this.setState({
+        interval: setInterval(this.timerIntervalSequence, 1000)
+      });
+      noSleep.enable();
     }
   };
 
@@ -131,7 +159,7 @@ class App extends Component {
         <Navbar />
         <Settings updateSettings={this.updateSettings} initSettings={settings} />
         <Timer currentTime={currentTime} />
-        <TimerControls isRunning={interval} toggleTimer={this.toggleTimer} />
+        <TimerControls isRunning={interval} playPause={this.playPause} />
         <Stats stats={this.state} />
       </div>
     );

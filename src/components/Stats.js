@@ -2,7 +2,9 @@ import React from 'react';
 import '../styles/Stats.css';
 
 const Stats = ({ stats }) => {
-  function formatTime(sec) {
+  const { totalElapsedTime, currentHang, currentSet, settings } = stats;
+
+  const formatTime = sec => {
     let minutes = Math.floor(sec / 60);
     let seconds = sec - minutes * 60;
 
@@ -13,9 +15,7 @@ const Stats = ({ stats }) => {
       seconds = `0${seconds}`;
     }
     return `${minutes}:${seconds}`;
-  }
-
-  const { totalElapsedTime, currentHang, currentSet, settings } = stats;
+  };
 
   return (
     <div className="section container">

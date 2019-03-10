@@ -11,19 +11,8 @@ class Settings extends Component {
   };
 
   componentDidMount() {
-    const { initSettings } = this.props;
-    this.setState({
-      ...initSettings
-    });
+    this.resetSettings();
   }
-
-  changeSettings = (e, setting) => {
-    const newValue = parseInt(e.target.value, 10) || 0;
-    e.target.value = newValue;
-    this.setState({
-      [setting]: newValue
-    });
-  };
 
   resetSettings = () => {
     const { initSettings } = this.props;
@@ -32,17 +21,12 @@ class Settings extends Component {
     });
   };
 
-  formatTime = sec => {
-    let minutes = Math.floor(sec / 60);
-    let seconds = sec - minutes * 60;
-
-    if (minutes < 10) {
-      minutes = `0${minutes}`;
-    }
-    if (seconds < 10) {
-      seconds = `0${seconds}`;
-    }
-    return `${minutes}:${seconds}`;
+  changeSettings = (e, setting) => {
+    const newValue = parseInt(e.target.value, 10) || 0;
+    e.target.value = newValue;
+    this.setState({
+      [setting]: newValue
+    });
   };
 
   formatSeconds = e => {
@@ -55,7 +39,7 @@ class Settings extends Component {
 
   render() {
     const { hangTime, restTime, breakTime, hangsPerSet, totalSets } = this.state;
-    const { initSettings, updateSettings } = this.props;
+    const { updateSettings } = this.props;
 
     return (
       <div id="settings" className="modal">
@@ -143,10 +127,10 @@ class Settings extends Component {
           <div
             className="modal-close waves-effect waves-green btn-flat"
             onKeyDown={() => {
-              this.resetSettings(initSettings);
+              this.resetSettings();
             }}
             onClick={() => {
-              this.resetSettings(initSettings);
+              this.resetSettings();
             }}
             role="button"
             tabIndex="0"

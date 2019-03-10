@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/Timer.css';
 
 const Timer = ({ currentTime }) => {
-  function formatTime(sec) {
+  const formatTime = sec => {
     let minutes = Math.floor(sec / 60);
     let seconds = sec - minutes * 60;
 
@@ -13,7 +13,7 @@ const Timer = ({ currentTime }) => {
       seconds = `0${seconds}`;
     }
     return `${minutes}:${seconds}`;
-  }
+  };
 
   return <h1 className="center">{formatTime(currentTime)}</h1>;
 };
