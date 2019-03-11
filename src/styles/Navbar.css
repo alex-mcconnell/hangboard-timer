@@ -1,0 +1,6 @@
+#navbar {
+  -moz-transition: all .5s linear !important;
+  -o-transition: all .5s linear !important;
+  -webkit-transition: all .5s linear !important;
+  transition: all .5s linear !important;
+}

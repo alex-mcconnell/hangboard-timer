@@ -53,6 +53,16 @@ class App extends Component {
     }
   };
 
+  resetSet = () => {
+    const { settings } = this.state;
+
+    this.setState({
+      currentTimeType: 'rest',
+      currentHang: 0,
+      currentTime: settings.restTime
+    });
+  };
+
   startHang = () => {
     const { currentHang, settings } = this.state;
 
@@ -146,6 +156,108 @@ class App extends Component {
     }
   };
 
+  calculateAdjustment = action => {
+    const { currentTime, currentTimeType, currentHang, settings } = this.state;
+
+    const isRest = currentTimeType === 'rest';
+    const isHang = currentTimeType === 'hang';
+    const hangMultiplier = settings.hangsPerSet - currentHang;
+
+    let adjustment = 0;
+
+    switch (action) {
+      case 'skip':
+        adjustment += currentTime;
+        if (isRest) {
+          adjustment +=
+            hangMultiplier * settings.hangTime + (hangMultiplier - 1) * settings.restTime;
+        } else if (isHang) {
+          adjustment += hangMultiplier * settings.hangTime + hangMultiplier * settings.restTime;
+        }
+        break;
+      case 'previous':
+        if (isRest) {
+          adjustment -=
+            currentHang * settings.hangTime +
+            currentHang * settings.restTime +
+            settings.restTime -
+            currentTime;
+        } else if (isHang) {
+          adjustment -=
+            (hangMultiplier - 1) * settings.hangTime +
+            hangMultiplier * settings.restTime +
+            settings.hangTime -
+            currentTime;
+        } else {
+          adjustment -= settings.breakTime - currentTime;
+        }
+        break;
+
+      default:
+        break;
+    }
+
+    return adjustment;
+  };
+
+  adjustTotalTimeElapsed = adjustment => {
+    const { totalElapsedTime } = this.state;
+
+    this.setState({
+      totalElapsedTime: totalElapsedTime + adjustment
+    });
+  };
+
+  skip = () => {
+    const { currentTimeType, currentSet, settings, noSleep } = this.state;
+
+    const isInitialized = currentTimeType;
+
+    const isRest = currentTimeType === 'rest';
+    const isHang = currentTimeType === 'hang';
+    const isBreak = currentTimeType === 'break';
+
+    const setsRemaining = currentSet < settings.totalSets;
+
+    if (isInitialized) {
+      this.adjustTotalTimeElapsed(this.calculateAdjustment('skip'));
+      if ((isRest || isHang) && setsRemaining) {
+        this.startBreak();
+      } else if (isBreak) {
+        this.startSet();
+      } else if ((isRest || isHang) && !setsRemaining) {
+        this.playPause();
+        this.resetTimer();
+        noSleep.disable();
+      }
+    }
+  };
+
+  previous = () => {
+    const { currentTimeType, currentSet, noSleep } = this.state;
+
+    const isInitialized = currentTimeType;
+
+    const isRest = currentTimeType === 'rest';
+    const isHang = currentTimeType === 'hang';
+    const isBreak = currentTimeType === 'break';
+
+    const previousSets = currentSet > 1;
+
+    if (isInitialized) {
+      this.adjustTotalTimeElapsed(this.calculateAdjustment('previous'));
+      if ((isRest || isHang) && previousSets) {
+        this.resetSet();
+      } else if (isBreak) {
+        this.startBreak();
+      } else if ((isRest || isHang) && !previousSets) {
+        this.playPause();
+        this.resetTimer();
+        noSleep.disable();
+      }
+    }
+  };
+
   updateSettings = settings => {
     this.setState({
       settings
@@ -153,13 +265,18 @@ class App extends Component {
   };
 
   render() {
-    const { currentTime, interval, settings } = this.state;
+    const { currentTime, interval, currentTimeType, settings } = this.state;
     return (
       <div className="App">
-        <Navbar />
+        <Navbar currentTimeType={currentTimeType} />
         <Settings updateSettings={this.updateSettings} initSettings={settings} />
         <Timer currentTime={currentTime} />
-        <TimerControls isRunning={interval} playPause={this.playPause} />
+        <TimerControls
+          isRunning={interval}
+          previous={this.previous}
+          playPause={this.playPause}
+          skip={this.skip}
+        />
         <Stats stats={this.state} />
       </div>
     );

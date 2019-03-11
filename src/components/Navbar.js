@@ -1,9 +1,24 @@
 import React from 'react';
+import '../styles/Navbar.css';
 
-const Navbar = () => {
+const Navbar = ({ currentTimeType }) => {
+  const navBarColor = () => {
+    if (currentTimeType === 'hang') {
+      return 'red darken-3';
+    }
+    if (currentTimeType === 'rest') {
+      return 'green darken-3';
+    }
+    if (currentTimeType === 'break') {
+      return 'blue darken-3';
+    }
+
+    return 'grey darken-3';
+  };
+
   return (
     <nav>
-      <div className="nav-wrapper grey darken-3">
+      <div className={`nav-wrapper ${navBarColor()} scale-transition scale-in`} id="navbar">
         <div className="container">
           <a href="/" className="brand-logo">
             {'Hangboard'}
