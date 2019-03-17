@@ -1,10 +1,10 @@
-h1 {
+#timer {
   font-size: 20vw !important;
   margin-top: 0px;
 }
 
 @media screen and (max-width: 960px) {
-  h1 {
+  #timer {
     font-size: 35vw !important;
   }
 }

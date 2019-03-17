@@ -21,16 +21,16 @@ const Stats = ({ stats }) => {
     <div className="section container">
       <div className="row">
         <div className="col s4">
-          <p className="center-align">Time Elapsed</p>
-          <h4 className="center-align">{formatTime(totalElapsedTime)}</h4>
+          <p className="center-align grey-text">Time Elapsed</p>
+          <h4 className="center-align grey-text">{formatTime(totalElapsedTime)}</h4>
         </div>
         <div className="col s4">
-          <p className="center-align">Hang</p>
-          <h4 className="center-align">{`${currentHang} / ${settings.hangsPerSet}`}</h4>
+          <p className="center-align grey-text">Hang</p>
+          <h4 className="center-align grey-text">{`${currentHang} / ${settings.hangsPerSet}`}</h4>
         </div>
         <div className="col s4">
-          <p className="center-align">Set</p>
-          <h4 className="center-align">{`${currentSet} / ${settings.totalSets}`}</h4>
+          <p className="center-align grey-text">Set</p>
+          <h4 className="center-align grey-text">{`${currentSet} / ${settings.totalSets}`}</h4>
         </div>
       </div>
     </div>

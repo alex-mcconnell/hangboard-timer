@@ -15,7 +15,11 @@ const Timer = ({ currentTime }) => {
     return `${minutes}:${seconds}`;
   };
 
-  return <h1 className="center">{formatTime(currentTime)}</h1>;
+  return (
+    <h1 className="center blue-grey-text text-darken-2" id="timer">
+      {formatTime(currentTime)}
+    </h1>
+  );
 };
 
 export default Timer;

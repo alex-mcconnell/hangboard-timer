@@ -1,32 +1,62 @@
-import React from 'react';
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+import React, { useState } from 'react';
 import '../styles/Navbar.css';
 
-const Navbar = ({ currentTimeType }) => {
-  const navBarColor = () => {
-    if (currentTimeType === 'hang') {
-      return 'red darken-3';
-    }
-    if (currentTimeType === 'rest') {
-      return 'green darken-3';
-    }
-    if (currentTimeType === 'break') {
-      return 'blue darken-3';
-    }
+const Navbar = () => {
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
-    return 'grey darken-3';
+  const toggleFullScreen = () => {
+    const doc = window.document;
+    const docEl = doc.documentElement;
+
+    const requestFullScreen =
+      docEl.requestFullscreen ||
+      docEl.mozRequestFullScreen ||
+      docEl.webkitRequestFullScreen ||
+      docEl.msRequestFullscreen;
+    const cancelFullScreen =
+      doc.exitFullscreen ||
+      doc.mozCancelFullScreen ||
+      doc.webkitExitFullscreen ||
+      doc.msExitFullscreen;
+
+    if (
+      !doc.fullscreenElement &&
+      !doc.mozFullScreenElement &&
+      !doc.webkitFullscreenElement &&
+      !doc.msFullscreenElement
+    ) {
+      requestFullScreen.call(docEl);
+      setIsFullscreen(true);
+    } else {
+      cancelFullScreen.call(doc);
+      setIsFullscreen(false);
+    }
   };
 
   return (
     <nav>
-      <div className={`nav-wrapper ${navBarColor()} scale-transition scale-in`} id="navbar">
+      <div className="nav-wrapper blue-grey darken-2" id="navbar">
         <div className="container">
-          <a href="/" className="brand-logo">
+          <a href="/" className="brand-logo blue-grey-text text-darken-4">
             {'Hangboard'}
           </a>
           <ul className="right">
             <li>
               <a className="modal-trigger" href="#settings">
-                <i className="material-icons">settings</i>
+                <i className="material-icons blue-grey-text text-darken-4">settings</i>
+              </a>
+            </li>
+            <li>
+              <a
+                className="modal-trigger"
+                onClick={() => toggleFullScreen()}
+                onKeyDown={() => toggleFullScreen()}
+              >
+                <i className="material-icons blue-grey-text text-darken-4">
+                  {isFullscreen ? 'fullscreen_exit' : 'fullscreen'}
+                </i>
               </a>
             </li>
           </ul>

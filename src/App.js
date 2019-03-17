@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import NoSleep from 'nosleep.js';
 
 import Navbar from './components/Navbar';
+import Settings from './components/Settings';
 import Timer from './components/Timer';
 import TimerControls from './components/TimerControls';
 import Stats from './components/Stats';
-import Settings from './components/Settings';
+import Word from './components/Word';
 
 class App extends Component {
   state = {
@@ -265,7 +266,8 @@ class App extends Component {
   };
 
   render() {
-    const { currentTime, interval, currentTimeType, settings } = this.state;
+    const { currentTime, interval, currentTimeType, settings, currentHang } = this.state;
+
     return (
       <div className="App">
         <Navbar currentTimeType={currentTimeType} />
@@ -278,6 +280,7 @@ class App extends Component {
           skip={this.skip}
         />
         <Stats stats={this.state} />
+        <Word currentTimeType={currentTimeType} currentHang={currentHang} />
       </div>
     );
   }

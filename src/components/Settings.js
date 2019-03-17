@@ -42,7 +42,7 @@ class Settings extends Component {
     const { updateSettings } = this.props;
 
     return (
-      <div id="settings" className="modal">
+      <div id="settings" className="modal grey lighten-4">
         <div className="modal-content">
           <h4>Settings</h4>
           <div className="row">
@@ -110,20 +110,7 @@ class Settings extends Component {
             </div>
           </div>
         </div>
-        <div className="modal-footer">
-          <div
-            className="modal-close waves-effect waves-green btn-flat"
-            onKeyDown={() => {
-              updateSettings(this.state);
-            }}
-            onClick={() => {
-              updateSettings(this.state);
-            }}
-            role="button"
-            tabIndex="0"
-          >
-            {'Save'}
-          </div>
+        <div className="modal-footer grey lighten-4">
           <div
             className="modal-close waves-effect waves-green btn-flat"
             onKeyDown={() => {
@@ -136,6 +123,19 @@ class Settings extends Component {
             tabIndex="0"
           >
             {'Cancel'}
+          </div>
+          <div
+            className="modal-close waves-effect waves-green btn-flat"
+            onKeyDown={() => {
+              updateSettings(this.state);
+            }}
+            onClick={() => {
+              updateSettings(this.state);
+            }}
+            role="button"
+            tabIndex="0"
+          >
+            {'Save'}
           </div>
         </div>
       </div>

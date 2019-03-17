@@ -1,13 +1,13 @@
 import React from 'react';
 
 const TimerControls = ({ isRunning, previous, playPause, skip }) => {
-  const color = isRunning ? 'red' : 'green';
+  const color = isRunning ? 'red accent-1' : 'green accent-1';
 
   return (
     <div className="container">
       <div className="row">
         <div
-          className={`col s3 waves-effect waves-light btn-large ${color}`}
+          className={`col s3 waves-effect waves-light btn-large btn-flat ${color}`}
           onClick={previous}
           onKeyDown={previous}
           role="button"
@@ -17,7 +17,7 @@ const TimerControls = ({ isRunning, previous, playPause, skip }) => {
         </div>
         <div className="col s6 row">
           <div
-            className={`col s12 waves-effect waves-light btn-large ${color}`}
+            className={`col s12 waves-effect waves-light btn-large btn-flat ${color}`}
             onClick={playPause}
             onKeyDown={playPause}
             role="button"
@@ -27,7 +27,7 @@ const TimerControls = ({ isRunning, previous, playPause, skip }) => {
           </div>
         </div>
         <div
-          className={`col s3 waves-effect waves-light btn-large ${color}`}
+          className={`col s3 waves-effect waves-light btn-large btn-flat ${color}`}
           onClick={skip}
           onKeyDown={skip}
           role="button"

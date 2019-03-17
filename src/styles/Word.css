@@ -1,0 +1,10 @@
+#word {
+  font-size: 10vw !important;
+  margin-top: 0px;
+}
+
+@media screen and (max-width: 960px) {
+  #word {
+    font-size: 16vw !important;
+  }
+}
