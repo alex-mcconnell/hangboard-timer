@@ -10,8 +10,14 @@ class Settings extends Component {
     totalSets: 0
   };
 
-  componentDidMount() {
-    this.resetSettings();
+  componentWillMount() {
+    if (localStorage.getItem('timer')) {
+      this.setState({
+        ...JSON.parse(localStorage.getItem('timer')).settings
+      });
+    } else {
+      this.resetSettings();
+    }
   }
 
   resetSettings = () => {

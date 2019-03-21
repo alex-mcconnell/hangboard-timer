@@ -13,13 +13,13 @@ Simple React app that helps time hangboard sets and workouts. This is the second
   - [x] Ability to change length of each set
   - [x] Ability to change the number of hangs in a set
   - [x] Ability to change length of each hang within a set
-  - [ ] Save settings in local storage
-  - [ ] Reset settings to default
-  - [ ] Light mode / dark mode
+  - [x] Save settings in local storage
 - [x] Timer has to keep phone screen on while timer is running
 
 #### Stretch Goals
 
+- [ ] Add functionality to previous button so you can go back further than the beginning of the set you are on
+- [ ] Light mode / dark mode / color theme options
 - [x] Make it look real nice on desktop and mobile
 
 ## Project setup

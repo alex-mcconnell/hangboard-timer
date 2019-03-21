@@ -26,6 +26,29 @@ class App extends Component {
     noSleep: new NoSleep()
   };
 
+  componentWillMount() {
+    const startState = { ...this.state };
+    delete startState.noSleep;
+    startState.interval = null;
+
+    if (localStorage.getItem('timer')) {
+      this.setState({
+        ...JSON.parse(localStorage.getItem('timer')),
+        noSleep: new NoSleep()
+      });
+    } else {
+      localStorage.setItem('timer', JSON.stringify(startState));
+    }
+  }
+
+  componentDidUpdate() {
+    const startState = { ...this.state };
+    // noSleep was causing issues when trying to call enable after being restored from local storage
+    delete startState.noSleep;
+    startState.interval = null;
+    localStorage.setItem('timer', JSON.stringify(startState));
+  }
+
   resetTimer = () => {
     this.setState({
       currentTimeType: null,
