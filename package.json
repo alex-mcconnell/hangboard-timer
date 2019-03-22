@@ -5,17 +5,19 @@
   "dependencies": {
     "eslint-config-prettier": "^4.1.0",
     "eslint-plugin-prettier": "^3.0.1",
+    "gh-pages": "^2.0.1",
     "nosleep.js": "^0.9.0",
     "prettier": "^1.16.4",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react-scripts": "^2.1.5"
+    "react-scripts": "^2.1.8"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -b master -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -32,5 +34,6 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.0"
-  }
+  },
+  "homepage": "https://alex-mcconnell.github.io/hangboard-timer"
 }
