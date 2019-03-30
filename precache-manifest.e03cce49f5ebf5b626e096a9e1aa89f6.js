@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/hangboard-timer/static/js/runtime~main.6b9dfb5a.js"
   },
   {
-    "revision": "3422a22941847a8c6f25",
+    "revision": "5b91588e9402f0302787",
     "url": "/hangboard-timer/static/js/main.7ca94158.chunk.js"
   },
   {
@@ -12,11 +12,11 @@ self.__precacheManifest = [
     "url": "/hangboard-timer/static/js/2.a212973d.chunk.js"
   },
   {
-    "revision": "3422a22941847a8c6f25",
-    "url": "/hangboard-timer/static/css/main.937c41d9.chunk.css"
+    "revision": "5b91588e9402f0302787",
+    "url": "/hangboard-timer/static/css/main.f0a5769f.chunk.css"
   },
   {
-    "revision": "460d2a9c971ad902ec5fd7c043510a45",
+    "revision": "6ca9acf7722131d5a88185bb0825aef1",
     "url": "/hangboard-timer/index.html"
   }
 ];
