@@ -1,6 +1,6 @@
 # Hangboard Timer App
 
-Simple React app that helps time hangboard sets and workouts. This is the second of ten simple ~~Vue~~ React apps I am building over the course of the next year to learn ~~Vue.js~~ React
+Simple React app that helps time hangboard sets and workouts. This is the second of ten simple ~~Vue~~ React apps I am building over the course of the next year to learn ~~Vue.js~~ React.  View the working application at https://alex-mcconnell.github.io/hangboard-timer.
 
 ## To Do
 
