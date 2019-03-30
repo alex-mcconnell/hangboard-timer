@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react';
 import '../styles/Navbar.css';
 
@@ -53,6 +51,7 @@ const Navbar = () => {
                 className="modal-trigger"
                 onClick={() => toggleFullScreen()}
                 onKeyDown={() => toggleFullScreen()}
+                href={() => {}}
               >
                 <i className="material-icons blue-grey-text text-darken-4">
                   {isFullscreen ? 'fullscreen_exit' : 'fullscreen'}

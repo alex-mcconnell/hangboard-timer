@@ -1,18 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="height: 100%">
 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+  <link rel="icon" href="./logo.png">
   <title>Hangboard Timer</title>
 </head>
 
-<body class="blue-grey darken-4">
+<body class="blue-grey darken-4" style="height: 100vh; display: flex; flex-direction: column">
   <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="root"></div>
+  <div id="root" style="height: 100%"></div>
+  <footer style="flex-shrink: 0;">
+    <div class="container center-align blue-grey-text text-darken-2">
+      <p style="margin: 0;">Application built by Alex McConnell ©
+        2019 - <a href="https://github.com/alex-mcconnell/hangboard-timer" target="_blank"
+          class="blue-grey-text text-darken-2"><u>View Code</u></a></p>
+    </div>
+  </footer>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function () {

@@ -1,6 +1,7 @@
 #timer {
   font-size: 20vw !important;
   margin-top: 0px;
+  padding-top: 10%;
 }
 
 @media screen and (max-width: 960px) {

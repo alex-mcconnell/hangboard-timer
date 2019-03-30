@@ -8,7 +8,7 @@ Simple React app that helps time hangboard sets and workouts. This is the second
   - [x] Start button
   - [x] Stop button
   - [x] Visual cue that indicates if you should be resting or hanging
-- [ ] Timer Settings
+- [x] Timer Settings
   - [x] Ability to change number of sets
   - [x] Ability to change length of each set
   - [x] Ability to change the number of hangs in a set
